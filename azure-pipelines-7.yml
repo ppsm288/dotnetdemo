@@ -22,7 +22,7 @@ steps:
     includePreviewVersions: true # Required for preview versions
 
 
-  
+    
 - task: DotNetCoreCLI@2
 
   inputs:
@@ -34,4 +34,14 @@ steps:
   inputs:
     command: 'publish'
     arguments: '--configuration $(buildConfiguration)'
+    publishWebProjects: true
   displayName: 'dotnet publish $(buildConfiguration)'
+
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'testingdot'
+    appType: 'webAppLinux'
+    appName: 'testing1209'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'DOTNETCORE|6.0'
