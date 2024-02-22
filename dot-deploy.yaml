@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dot-application
+  namespace: dotnetnamespace
+  labels:
+    app: dotnet-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dotnet-app
+  template:
+    metadata:
+      labels:
+        app: dotnet-app
+    spec:
+      serviceAccountName: my-service-account
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - aks-kubetest-17294321-vmss000008
+      tolerations:  
+      - key: state        
+        operator: Equal  
+        value: test      
+        effect: NoSchedule 
+      containers:
+      - name: dotnet-app
+        image: dotdemo.azurecr.io/dotdemo:2.0.0
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 250m
+            memory: 250Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
+        env:
+        - name: APP_SETTING_1
+          valueFrom:
+            configMapKeyRef:
+              name: dotnet-configmap
+              key: APP_SETTING_1
+        - name: APP_SETTING_2
+          valueFrom:
+            configMapKeyRef:
+              name: dotnet-configmap
+              key: APP_SETTING_2
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: dotnet-secret
+              key: SECRET_KEY
+        livenessProbe:
+          exec:
+            command:
+              - echo
+              - "Container is alive"
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+              - echo
+              - "Container is ready"
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+      imagePullSecrets:
+      - name: demo12

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dotnet-configmap
+  namespace: dotnetnamespace
+data:
+  APP_SETTING_1: value1
+  APP_SETTING_2: value2

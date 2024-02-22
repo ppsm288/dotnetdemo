@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dotnet-app-deployment
+  name: nginx-deployment
+  labels:
+    app: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: dotnet-app
+      app: nginx
   template:
     metadata:
       labels:
-        app: dotnet-app
+        app: nginx
     spec:
       containers:
-      - name: dotnet-app
-        image:  dotdemo.azurecr.io/dotdemo:2.0.0
+      - name: nginx
+        image: nginx:1.14.2
         ports:
         - containerPort: 80
