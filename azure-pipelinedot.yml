@@ -17,6 +17,8 @@ steps:
 variables:
   buildconfiguration: 'Release'
 
+steps:
+
 - task: UseDotNetCLI@2
   inputs:
     command: 'build'
