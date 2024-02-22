@@ -6,6 +6,11 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+
+variables:
+  buildconfiguration: 'Release'
+
+
 steps:
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
@@ -14,11 +19,8 @@ steps:
     performMultiLevelLookup: true
     includePreviewVersions: true # Required for preview versions
 
-variables:
-  buildconfiguration: 'Release'
 
-steps:
-
+  
 - task: UseDotNetCLI@2
   inputs:
     command: 'build'
