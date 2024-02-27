@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: dot-application-hpa
-  namespace: dotnetnamespace
+  namespace: test
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
