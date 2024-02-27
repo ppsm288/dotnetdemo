@@ -35,32 +35,38 @@ stages:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'publishedFiles'
 
+# pipeline.yaml
+stages:
 - stage: Test
   displayName: 'Test Stage'
   jobs:
   - job: TestJob
     displayName: 'Test Job'
+    steps:
+    - script: echo "Running tests..."
 
 - stage: Deployment
   displayName: 'Deployment Stages'
   jobs:
   - job: DeploymentJob
     displayName: 'Deployment Job'
+    steps:
+    - script: echo "Deploying application..."
 
 - stage: Approval
   displayName: 'Approval Stage'
   jobs:
   - job: ApprovalJob
     displayName: 'Approval Job'
+    steps:
+    - script: echo "Waiting for approval..."
 
 - stage: Release
   displayName: 'Release Stage'
   jobs:
   - job: ReleaseJob
     displayName: 'Release Job'
+    steps:
+    - script: echo "Releasing application..."
 
 - stage: PostDeployment
-  displayName: 'Post-Deployment Stage'
-  jobs:
-  - job: PostDeploymentJob
-    displayName: 'Post-Deployment Job'
