@@ -67,4 +67,3 @@ stages:
     steps:
     - script: echo "Releasing application..."
 
-- stage: PostDeployment
