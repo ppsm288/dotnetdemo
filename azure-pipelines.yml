@@ -35,8 +35,6 @@ stages:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'publishedFiles'
 
-# pipeline.yaml
-stages:
 - stage: Test
   displayName: 'Test Stage'
   jobs:
