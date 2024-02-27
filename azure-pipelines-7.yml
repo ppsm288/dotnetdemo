@@ -40,37 +40,27 @@ stages:
   jobs:
   - job: TestJob
     displayName: 'Test Job'
-    steps:
-    # Add tasks for testing here
 
 - stage: Deployment
   displayName: 'Deployment Stages'
   jobs:
   - job: DeploymentJob
     displayName: 'Deployment Job'
-    steps:
-    # Add tasks for deployment here
 
 - stage: Approval
   displayName: 'Approval Stage'
   jobs:
   - job: ApprovalJob
     displayName: 'Approval Job'
-    steps:
-    # Add tasks for approval process here
 
 - stage: Release
   displayName: 'Release Stage'
   jobs:
   - job: ReleaseJob
     displayName: 'Release Job'
-    steps:
-    # Add tasks for release process here
 
 - stage: PostDeployment
   displayName: 'Post-Deployment Stage'
   jobs:
   - job: PostDeploymentJob
     displayName: 'Post-Deployment Job'
-    steps:
-    # Add tasks for post-deployment tasks here
